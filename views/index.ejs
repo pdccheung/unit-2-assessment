@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>To Do List</h1>
+      <div>
+        <% if (!todos.length) { %>
+          <h3>There are no To Dos yet!</h3>
+        <% } else { %>
+          <ul>
+            <% for(let i of todos) { %>
+            <%  i.done = false ? 'Done' : 'Not Done'; %>
+              <h3><li><%=i.todo %> - <%=i.done %> </h3> 
+              <form action="/delete?_method=DELETE" method="POST">
+                <button style="display:inline" name="todo" value="<%=i.todo%>">Delete</button>
+              </form></li>
+            <% } %>
+          </ul>
+          <%} %><hr>
+        <form action="/todos" method="POST">
+          <input type="text" name="todo" placeholder="Add to dos" required>
+          <button type="submit">ADD TO DO</button>
+        </form>
+      </div>
+  </body>
+</html>
